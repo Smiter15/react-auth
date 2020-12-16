@@ -46,21 +46,13 @@ const Register = () => {
 			password_confirm: passwordConfirm
 		};
 		console.log('submit', formData);
-		// const response = await fetch('http://localhost:8000/register', {
-		// 	method: 'POST',
-		// 	headers: {
-		// 		'content-type': 'application/json'
-		// 	},
-		// 	data: formData
-		// });
-		axios('http://localhost:8000/register', {
+		axios('http://localhost:8000/api/register', {
 			method: 'POST',
-			data: formData
+			data: formData,
+			withCredentials: true
 		})
 			.then((res) => console.log(res))
 			.catch((err) => console.log('ERRREREERE', err));
-		// const data = await response.json();
-		// console.log('data', data);
 	};
 
 	return (
