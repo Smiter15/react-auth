@@ -1,23 +1,9 @@
-import React, { useState } from 'react';
-
+import React from 'react';
 import axios from 'axios';
 
-const Register = () => {
-	const useInput = ({ type, label }) => {
-		const [value, setValue] = useState('');
-		const input = (
-			<>
-				<label>{label}</label>
-				<input
-					value={value}
-					onChange={(e) => setValue(e.target.value)}
-					type={type}
-				/>
-			</>
-		);
-		return [value, input];
-	};
+import { useInput } from '../customHooks';
 
+const Register = () => {
 	const [firstName, firstNameInput] = useInput({
 		label: 'First name',
 		type: 'text'
@@ -45,14 +31,8 @@ const Register = () => {
 			password,
 			password_confirm: passwordConfirm
 		};
-		console.log('submit', formData);
-		axios('http://localhost:8000/api/register', {
-			method: 'POST',
-			data: formData,
-			withCredentials: true
-		})
-			.then((res) => console.log(res))
-			.catch((err) => console.log('ERRREREERE', err));
+
+		await axios.post('register', formData);
 	};
 
 	return (
